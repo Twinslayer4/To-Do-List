@@ -4,7 +4,11 @@ def main():
     commandNumber = 0
     taskLists = [];
     while commandNumber != 4:
-        commandNumber = int(input("Enter 1 to input new task.\nEnter 2 to print out tasks.\nEnter 3 to delete a task.\nEnter 4 to end program.\n"))
+        try:
+            commandNumber = int(input("Enter 1 to input new task.\nEnter 2 to print out tasks.\nEnter 3 to delete a task.\nEnter 4 to end program.\n"))
+        except:
+            print("Invalid Output");
+            continue
         if commandNumber == 1: # Input new tasks
             taskLists.append(input("Enter new task: "));
         elif commandNumber == 2:
@@ -17,5 +21,6 @@ def main():
             return;
         else: 
             print("Not a valid command")
+
 
 main()
