@@ -1,8 +1,10 @@
+import datetime
 
 
 def main():
     commandNumber = 0
-    taskLists = [];
+    taskLists = []
+    dueDateList = []
     while commandNumber != 4:
         try:
             commandNumber = int(input("Enter 1 to input new task.\nEnter 2 to print out tasks.\nEnter 3 to delete a task.\nEnter 4 to end program.\n"))
@@ -10,17 +12,31 @@ def main():
             print("Invalid Output");
             continue
         if commandNumber == 1: # Input new tasks
-            taskLists.append(input("Enter new task: "));
+            taskLists.append(input("Enter new task: "))
+            if input("Too add a due date type in 1 else input any other character: ") == "1":
+                try:
+                    year = int(input("Enter year: "))
+                    month = int(input("Enter month: "))
+                    day = int(input("Enter day: "))
+                    dueDate = datetime.datetime(year, month, day)
+                    dueDateList.append(dueDate)
+                except:
+                    print("Invalid Input")
+                continue
+            dueDateList.append("N/A")
         elif commandNumber == 2:
             for i in range(len(taskLists)):
-                print(f"{i+1}: {taskLists[i]}")
+                print(f"{i+1}: {taskLists[i]}", end="   ")
+                if type(dueDateList[i]) == datetime.datetime:
+                    print(dueDateList[i].strftime("%x"), end="")
+                print("\n", end="")
         elif commandNumber == 3: #Delete a task
             taskToDelete = int(input("Enter the number of the task to be deleted.")) -1
             taskLists.pop(taskToDelete)
+            dueDateList.pop(taskToDelete)
         elif commandNumber == 4: #Quit program
-            return;
+            return
         else: 
             print("Not a valid command")
-
 
 main()
